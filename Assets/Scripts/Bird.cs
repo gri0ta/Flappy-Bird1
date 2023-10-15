@@ -9,6 +9,9 @@ public class Bird : MonoBehaviour
     public int score;
 
     public TMP_Text scoreText;
+    public GameObject endScreen;
+
+    public float speed;
 
     void Start()
     {
@@ -17,19 +20,37 @@ public class Bird : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (Input.GetKeyDown(KeyCode.Mouse0) && speed > 0)
         {
             rb.velocity = Vector2.up * jumpSpeed;
         }
 
         transform.eulerAngles = new Vector3(0, 0, rb.velocity.y * 3f);
+        Pipe.speed = speed;
     }
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        var currentScene = SceneManager.GetActiveScene().name;
-        SceneManager.LoadScene(currentScene);
+        Die();
     }
+
+
+    public void Die()
+    {
+        speed = 0;
+        Invoke("ShowMenu",1f); // calls function after 1 second
+
+        //var currentScene = SceneManager.GetActiveScene().name;
+        //SceneManager.LoadScene(currentScene);
+    }
+
+    void ShowMenu()
+    {
+        scoreText.text = ""; // arba scoreText.gameObject.SetActive(false);
+        endScreen.SetActive(true);
+        print("end screen");
+    }
+
 
     void OnTriggerEnter2D(Collider2D other)
     {
