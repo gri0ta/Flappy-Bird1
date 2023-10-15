@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -6,6 +7,8 @@ public class Bird : MonoBehaviour
     public float jumpSpeed = 5;
     Rigidbody2D rb;
     public int score;
+
+    public TMP_Text scoreText;
 
     void Start()
     {
@@ -18,6 +21,8 @@ public class Bird : MonoBehaviour
         {
             rb.velocity = Vector2.up * jumpSpeed;
         }
+
+        transform.eulerAngles = new Vector3(0, 0, rb.velocity.y * 3f);
     }
 
     void OnCollisionEnter2D(Collision2D other)
@@ -29,7 +34,6 @@ public class Bird : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         score++;
-
-        
+        scoreText.text = score.ToString();
     }
 }
