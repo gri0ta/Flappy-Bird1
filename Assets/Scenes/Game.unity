@@ -872,7 +872,7 @@ MonoBehaviour:
   score: 0
   scoreText: {fileID: 211310767}
   endScreen: {fileID: 1621419933}
-  speed: 2
+  speed: 5
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
